@@ -1,0 +1,369 @@
+{
+    "language_select": {
+      "message": {
+        "en": "Welcome to Postbank 👋\nPlease choose your language:",
+        "sw": "Karibu Postbank 👋\nTafadhali chagua lugha yako:"
+      },
+      "options": [
+        { "label": { "en": "English", "sw": "English" }, "setLanguage": "en", "next": "main_menu" },
+        { "label": { "en": "Swahili", "sw": "Kiswahili" }, "setLanguage": "sw", "next": "main_menu" }
+      ]
+    },
+  
+    "main_menu": {
+      "message": {
+        "en": "Please choose a topic:",
+        "sw": "Chagua mada:"
+      },
+      "options": [
+        { "label": { "en": "Accounts", "sw": "Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Mobile Banking", "sw": "Huduma ya Simu" }, "next": "mobile_menu" },
+        { "label": { "en": "Cards & ATM", "sw": "Kadi & ATM" }, "next": "cards_menu" },
+        { "label": { "en": "Transfers", "sw": "Uhamisho wa Fedha" }, "next": "transfers_menu" },
+        { "label": { "en": "Branches", "sw": "Matawi" }, "next": "branches_menu" },
+        { "label": { "en": "Loans", "sw": "Mikopo" }, "next": "loans_menu" },
+        { "label": { "en": "More", "sw": "Zaidi" }, "next": "more_menu" }
+      ]
+    },
+  
+    "accounts_menu": {
+      "message": {
+        "en": "What would you like help with?",
+        "sw": "Ungependa msaada gani?"
+      },
+      "options": [
+        { "label": { "en": "Open Savings Account", "sw": "Fungua Akaunti ya Akiba" }, "next": "open_savings" },
+        { "label": { "en": "Open HELB Account", "sw": "Fungua Akaunti ya HELB" }, "next": "open_helb" },
+        { "label": { "en": "Open Company Account", "sw": "Fungua Akaunti ya Kampuni" }, "next": "open_company" },
+        { "label": { "en": "Dormant / Reactivation", "sw": "Akaunti Zilizokwisha / Fanya tena" }, "next": "dormant_account" },
+        { "label": { "en": "SAYE Account", "sw": "Akaunti ya SAYE" }, "next": "saye_account" },
+        { "label": { "en": "Account Number", "sw": "Namba ya Akaunti" }, "next": "account_number" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "open_savings": {
+      "message": {
+        "en": "To open a Savings Account, please bring:\n• Original ID/Passport\n• KRA PIN\n• Minimum opening balance\nVisit your nearest branch.",
+        "sw": "Ili kufungua Akaunti ya Akiba, tafadhali leta:\n• Kitambulisho halisi au Pasipoti\n• Nambari ya KRA PIN\n• Kiasi cha chini cha kufungua akaunti\nTembelea tawi lililo karibu nawe."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "open_helb": {
+      "message": {
+        "en": "To open a HELB Account, visit your nearest Postbank branch with your birth certificate and parent/guardian’s ID.",
+        "sw": "Ili kufungua Akaunti ya HELB, tembelea tawi la Postbank lililo karibu na kitambulisho chako na cha mzazi/mlezi."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "open_company": {
+      "message": {
+        "en": "To open a Company Account, bring:\n• Director IDs/photos\n• Company registration docs\n• KSh 5,000 minimum balance\n• KSh 1,800 search fee\nVisit the branch.",
+        "sw": "Ili kufungua Akaunti ya Kampuni, leta:\n• Kitambulisho / Picha za Wakurugenzi\n• Hati za usajili wa kampuni\n• Salio la chini KSh 5,000\n• Ada ya KSh 1,800\nTembelea tawi."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "dormant_account": {
+      "message": {
+        "en": "A dormant account can be reactivated by visiting the nearest branch and completing activation forms. You may also deposit via Paybill 200999.",
+        "sw": "Akaunti iliyokwisha inaweza kufufuliwa kwa kutembelea tawi lililo karibu na kujaza fomu za ufafanuzi. Unaweza pia kuweka fedha kupitia Paybill 200999."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "saye_account": {
+      "message": {
+        "en": "For SAYE account payments or benefits, please let us know which institution you expect your payment from so we can assist further.",
+        "sw": "Kwa malipo au faida za akaunti ya SAYE, tafadhali tueleze taasisi unayotarajia malipo kutoka ili tuweze kusaidia zaidi."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "account_number": {
+      "message": {
+        "en": "Your account number is the 13-digit number above your name on your debit card. You can also dial *498# on mobile banking or email info@postbank.co.ke with your ID and name.",
+        "sw": "Namba yako ya akaunti ni namba ya tarakimu 13 iliyo juu ya jina lako kwenye kadi ya debit. Pia unaweza piga *498# kwenye huduma ya simu au tuma barua pepe info@postbank.co.ke pamoja na kitambulisho na jina lako."
+      },
+      "options": [
+        { "label": { "en": "Back to Accounts", "sw": "Rudi Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "mobile_menu": {
+      "message": {
+        "en": "Mobile Banking options:",
+        "sw": "Chaguzi za Huduma ya Simu:"
+      },
+      "options": [
+        { "label": { "en": "Self-Registration", "sw": "Usajili wa Kujitegemea" }, "next": "mobile_registration" },
+        { "label": { "en": "PIN / Blocked Issues", "sw": "Masuala ya PIN / Blocked" }, "next": "mobile_pin_blocked" },
+        { "label": { "en": "Invalid Device", "sw": "Kifaa Kisicho Sahihi" }, "next": "mobile_invalid_device" },
+        { "label": { "en": "App Download", "sw": "Pakua App" }, "next": "mobile_app_download" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "mobile_registration": {
+      "message": {
+        "en": "To self-register for mobile banking, dial *498# on your phone and follow the prompts. If you experience errors, visit your nearest branch.",
+        "sw": "Ili kujisajili kwa huduma ya simu, piga *498# kwenye simu yako na fuata maelekezo. Ikiwa utapata makosa, tembelea tawi lililo karibu."
+      },
+      "options": [
+        { "label": { "en": "Back to Mobile Banking", "sw": "Rudi Huduma ya Simu" }, "next": "mobile_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "mobile_pin_blocked": {
+      "message": {
+        "en": "Too many incorrect PIN attempts can block your access. Visit the nearest branch for PIN reset or assistance.",
+        "sw": "Jaribio la PIN zisizo sahihi mara nyingi linaweza kuzuia akaunti yako. Tembelea tawi lililo karibu kwa urejeshaji wa PIN au msaada."
+      },
+      "options": [
+        { "label": { "en": "Back to Mobile Banking", "sw": "Rudi Huduma ya Simu" }, "next": "mobile_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "mobile_invalid_device": {
+      "message": {
+        "en": "‘Invalid Device’ errors usually occur after SIM or phone replacement due to IMSI mismatch. Please visit your branch to resolve.",
+        "sw": "Makosa ya ‘Kifaa Kisicho Sahihi’ hutokea baada ya kubadilisha SIM au simu kutokana na kutofautiana kwa IMSI. Tafadhali tembelea tawi lako ili kutatua."
+      },
+      "options": [
+        { "label": { "en": "Back to Mobile Banking", "sw": "Rudi Huduma ya Simu" }, "next": "mobile_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "mobile_app_download": {
+      "message": {
+        "en": "Download the Postbank mobile app from the Play Store: https://play.google.com/store/apps/details?id=io.eclectic.rnd.postbank",
+        "sw": "Pakua app ya Postbank kutoka Play Store: https://play.google.com/store/apps/details?id=io.eclectic.rnd.postbank"
+      },
+      "options": [
+        { "label": { "en": "Back to Mobile Banking", "sw": "Rudi Huduma ya Simu" }, "next": "mobile_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "cards_menu": {
+      "message": {
+        "en": "Cards & ATM options:",
+        "sw": "Chaguzi za Kadi & ATM:"
+      },
+      "options": [
+        { "label": { "en": "PIN Issues", "sw": "Masuala ya PIN" }, "next": "cards_pin" },
+        { "label": { "en": "ATM Limits", "sw": "Vikwazo vya ATM" }, "next": "cards_limits" },
+        { "label": { "en": "Card Processing & Fees", "sw": "Uchakavu wa Kadi & Ada" }, "next": "cards_fees" },
+        { "label": { "en": "Withheld / Lost Card", "sw": "Kadi Iliyokamatwa / Iliyo Potea" }, "next": "cards_withheld" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "cards_pin": {
+      "message": {
+        "en": "If you forgot your ATM PIN or need a reset, please visit the nearest branch.",
+        "sw": "Kama umepoteza PIN ya ATM au unahitaji kurekebisha, tafadhali tembelea tawi lililo karibu."
+      },
+      "options": [
+        { "label": { "en": "Back to Cards & ATM", "sw": "Rudi Kadi & ATM" }, "next": "cards_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "cards_limits": {
+      "message": {
+        "en": "Maximum daily ATM withdrawal is KSh 40,000. Requests for higher limits can be made at your branch.",
+        "sw": "Kiwango cha juu cha kutoa pesa kwa siku kwenye ATM ni KSh 40,000. Maombi ya kuongeza kikomo yanaweza kufanywa kwenye tawi."
+      },
+      "options": [
+        { "label": { "en": "Back to Cards & ATM", "sw": "Rudi Kadi & ATM" }, "next": "cards_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "cards_fees": {
+      "message": {
+        "en": "ATM cards are usually processed instantly; fee is KSh 600. Other fees include ATM KSh 40, Over the counter KSh 70, Mobile banking KSh 50–60, PIN re-issue KSh 168.",
+        "sw": "Kadi za ATM huchakatwa mara moja; ada ni KSh 600. Ada nyingine ni ATM KSh 40, Over the counter KSh 70, Huduma ya simu KSh 50–60, PIN re-issue KSh 168."
+      },
+      "options": [
+        { "label": { "en": "Back to Cards & ATM", "sw": "Rudi Kadi & ATM" }, "next": "cards_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "cards_withheld": {
+      "message": {
+        "en": "If your card is withheld or lost, report to the nearest branch for assistance.",
+        "sw": "Kama kadi yako imekamatwa au imepotea, ripoti kwenye tawi lililo karibu kwa msaada."
+      },
+      "options": [
+        { "label": { "en": "Back to Cards & ATM", "sw": "Rudi Kadi & ATM" }, "next": "cards_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "transfers_menu": {
+      "message": {
+        "en": "Transfers options:",
+        "sw": "Chaguzi za Uhamisho wa Fedha:"
+      },
+      "options": [
+        { "label": { "en": "To M-Pesa", "sw": "Hadi M-Pesa" }, "next": "transfer_mpesa" },
+        { "label": { "en": "Paybill Deposit", "sw": "Amana ya Paybill" }, "next": "transfer_paybill" },
+        { "label": { "en": "SWIFT / International", "sw": "SWIFT / Kimataifa" }, "next": "transfer_swift" },
+        { "label": { "en": "Wrong Number / Reversal", "sw": "Namba Isiyo Sahihi / Kurudishwa" }, "next": "transfer_wrong" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "transfer_mpesa": {
+      "message": {
+        "en": "To transfer from your Postbank account to M-Pesa, register for Mobile Banking, dial *498#, and follow the prompts. (Excludes SAYE, SMATA, and Premium Plus accounts.)",
+        "sw": "Ili kuhamisha kutoka akaunti yako ya Postbank kwenda M-Pesa, jisajili kwa Huduma ya Simu, piga *498# na fuata maelekezo. (Haijumuishi akaunti za SAYE, SMATA, na Premium Plus.)"
+      },
+      "options": [
+        { "label": { "en": "Back to Transfers", "sw": "Rudi Uhamisho" }, "next": "transfers_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "transfer_paybill": {
+      "message": {
+        "en": "Deposit via Paybill 200999:\n• Account: your 13-digit account number on ATM card\n• Amount\n• M-Pesa PIN",
+        "sw": "Amana kupitia Paybill 200999:\n• Akaunti: namba yako ya tarakimu 13 kwenye kadi ya ATM\n• Kiasi\n• PIN ya M-Pesa"
+      },
+      "options": [
+        { "label": { "en": "Back to Transfers", "sw": "Rudi Uhamisho" }, "next": "transfers_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "transfer_swift": {
+      "message": {
+        "en": "To initiate a SWIFT transfer to Postbank, provide:\n• Incoming bank: Citibank N.A (Nairobi), Bank Code 16000, Account 0300030106\n• Beneficiary: Kenya Post Office Savings Bank\n• Customer name & account number",
+        "sw": "Ili kuanzisha uhamisho wa SWIFT kwenda Postbank, toa:\n• Benki inayotuma: Citibank N.A (Nairobi), Bank Code 16000, Akaunti 0300030106\n• Mfaidika: Kenya Post Office Savings Bank\n• Jina la mteja & namba ya akaunti"
+      },
+      "options": [
+        { "label": { "en": "Back to Transfers", "sw": "Rudi Uhamisho" }, "next": "transfers_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "transfer_wrong": {
+      "message": {
+        "en": "If you sent money to the wrong number/account, contact Customer Care: 0716918999 / 0734856353 or email info@postbank.co.ke for reversal assistance.",
+        "sw": "Kama umehamisha pesa kwenda namba/akaunti isiyo sahihi, wasiliana na Huduma kwa Wateja: 0716918999 / 0734856353 au tuma barua pepe info@postbank.co.ke kwa msaada wa kurekebisha."
+      },
+      "options": [
+        { "label": { "en": "Back to Transfers", "sw": "Rudi Uhamisho" }, "next": "transfers_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "branches_menu": {
+      "message": {
+        "en": "Branches & Hours options:",
+        "sw": "Chaguzi za Matawi & Saa za Kufanya Kazi:"
+      },
+      "options": [
+        { "label": { "en": "Operating Hours", "sw": "Saa za Kufanya Kazi" }, "next": "branches_hours" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "branches_hours": {
+      "message": {
+        "en": "Mon–Fri: 8:30am–4:00pm\nSaturday: 8:30am–12:30pm\nClosed on Sundays & public holidays. ATMs available 24/7.",
+        "sw": "Jumatatu–Ijumaa: 8:30am–4:00pm\nJumamosi: 8:30am–12:30pm\nZimefungwa Jumapili & sikukuu. ATM zinapatikana 24/7."
+      },
+      "options": [
+        { "label": { "en": "Back to Branches", "sw": "Rudi Matawi" }, "next": "branches_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "loans_menu": {
+      "message": {
+        "en": "Loan options:",
+        "sw": "Chaguzi za Mikopo:"
+      },
+      "options": [
+        { "label": { "en": "Eligibility / Current Offerings", "sw": "Uhitaji / Ofa Zilizopo" }, "next": "loans_eligibility" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "loans_eligibility": {
+      "message": {
+        "en": "Currently, credit services are limited to pensioners. Updates will be shared when offerings expand.",
+        "sw": "Kwa sasa, huduma za mkopo zinalengwa kwa wastaafu tu. Taarifa mpya zitatolewa baada ya upanuzi."
+      },
+      "options": [
+        { "label": { "en": "Back to Loans", "sw": "Rudi Mikopo" }, "next": "loans_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "more_menu": {
+      "message": {
+        "en": "More options:",
+        "sw": "Chaguzi Zaidi:"
+      },
+      "options": [
+        { "label": { "en": "Careers / Internship", "sw": "Ajira / Mafunzo" }, "next": "careers_menu" },
+        { "label": { "en": "Complaints / Feedback", "sw": "Malalamiko / Maoni" }, "next": "complaints_menu" },
+        { "label": { "en": "Back", "sw": "Rudi" }, "next": "main_menu" }
+      ]
+    },
+  
+    "careers_menu": {
+      "message": {
+        "en": "Currently no job openings. Internships offered quarterly via HR: hr@postbank.co.ke or submit at Postbank House, 4th floor.",
+        "sw": "Kwa sasa hakuna nafasi za kazi. Mafunzo hufanyika kila robo mwaka kupitia HR: hr@postbank.co.ke au wasilisha Postbank House, ghorofa ya 4."
+      },
+      "options": [
+        { "label": { "en": "Back to More", "sw": "Rudi Zaidi" }, "next": "more_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "complaints_menu": {
+      "message": {
+        "en": "For complaints or feedback, share details and your phone number. Our team will follow up to improve services.",
+        "sw": "Kwa malalamiko au maoni, tuma maelezo na namba yako ya simu. Timu yetu itafuatilia ili kuboresha huduma."
+      },
+      "options": [
+        { "label": { "en": "Back to More", "sw": "Rudi Zaidi" }, "next": "more_menu" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
+      ]
+    },
+  
+    "goodbye": {
+      "message": {
+        "en": "Thank you for using Postbank chatbot. Have a great day! 👋",
+        "sw": "Asante kwa kutumia chatbot ya Postbank. Kuwa na siku njema! 👋"
+      }
+    }
+  }

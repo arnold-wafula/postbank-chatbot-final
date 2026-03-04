@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Postbank Chatbot</title>
+
+  <!-- Brand font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="chat-container">
+    <!-- Header -->
+    <div class="chat-header">Postbank FAQ Assistant</div>
+
+    <!-- Chat window -->
+    <div id="messages" class="chat-window"></div>
+
+    <!-- Options buttons -->
+    <div id="options" class="options-container"></div>
+
+    <!-- Input -->
+    <div class="input-container">
+      <input id="messageInput" type="text" placeholder="Type your question here... e.g., 'How do I open an account?'" />
+      <button class="send-btn" onclick="sendMessage()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M3 11.5L21 3L13 21L11.5 13L3 11.5Z"
+            fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="powered-by">Powered by Postbank • Prototype</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
