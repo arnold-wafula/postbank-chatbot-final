@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
   <title>Postbank Chatbot</title>
 
-  <!-- Brand font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <!-- UI font (Inter is a good web-safe stand‑in for Segoe UI Variable) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="chat-container">
-    <!-- Header -->
-    <div class="chat-header">Postbank FAQ Assistant</div>
+  <div class="chat-container" role="application" aria-label="Postbank FAQ Assistant">
 
-    <!-- Chat window -->
-    <div id="messages" class="chat-window"></div>
+    <!-- Header: minimalist, Copilot-like -->
+    <header class="chat-header" role="banner">
+      <div class="title">
+        <span class="header-accent-dot" aria-hidden="true"></span>
+        <span>Postbank FAQ Assistant</span>
+      </div>
+    </header>
 
-    <!-- Options buttons -->
-    <div id="options" class="options-container"></div>
+    <!-- Chat window (bubbles will be injected here by script.js) -->
+    <main
+      id="messages"
+      class="chat-window"
+      role="log"
+      aria-live="polite"
+      aria-relevant="additions"
+      aria-label="Conversation">
+    </main>
 
-    <!-- Input -->
-    <div class="input-container">
-      <input id="messageInput" type="text" placeholder="Type your question here... e.g., 'How do I open an account?'" />
-      <button class="send-btn" onclick="sendMessage()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M3 11.5L21 3L13 21L11.5 13L3 11.5Z"
-            fill="currentColor"/>
+    <!-- Suggested actions (chips) -->
+    <div id="chips" class="chips-row" role="group" aria-label="Suggested actions"></div>
+
+    <!-- Node-driven options from your JSON flow -->
+    <div id="options" class="options-container" role="group" aria-label="Options"></div>
+
+    <!-- Input: simple, elegant, keyboard-friendly -->
+    <form class="input-container" role="form" aria-label="Send a message" onsubmit="event.preventDefault(); sendMessage();">
+      <label for="messageInput" class="visually-hidden">Type your message</label>
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Ask a question or describe what you need"
+        autocomplete="off"
+        aria-label="Message input" />
+      <button class="send-btn" type="submit" aria-label="Send message">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 11.5L21 3L13 21L11.5 13L3 11.5Z" fill="currentColor"/>
         </svg>
       </button>
-    </div>
+    </form>
 
     <!-- Footer -->
-    <div class="powered-by">Powered by Postbank • Prototype</div>
-</div>
+    <footer class="powered-by" role="contentinfo">Powered by Postbank • Prototype</footer>
+  </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

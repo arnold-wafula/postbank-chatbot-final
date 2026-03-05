@@ -1,0 +1,943 @@
+{
+  "id": "copilots_header_3dd3e",
+  "kind": "AdaptiveDialog",
+  "description": "Postbank FAQ Chatbot (Bilingual, streamlined main menu, progressive disclosure)",
+  "triggers": [
+    {
+      "kind": "OnConversationStart",
+      "actions": [
+        { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.LanguageSelect" }
+      ]
+    }
+  ],
+  "dialogs": [
+    {
+      "id": "copilots_header_3dd3e.topic.LanguageSelect",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Language Select", "triggerQueries": ["language", "lugha", "select language", "chagua lugha", "start"] },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Conversation.Locale",
+              "prompt": "Welcome to Postbank 👋\\nPlease choose your language:\\n\\nKaribu Postbank 👋\\nTafadhali chagua lugha yako:",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "en", "displayName": "English" },
+                    { "id": "sw", "displayName": "Kiswahili" }
+                  ]
+                }
+              }
+            },
+            { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.MainMenu",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "menu\\nmain menu\\nhome\\nstart over\\nrestart\\ngo back",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": {
+            "displayName": "Main Menu",
+            "triggerQueries": ["menu","main menu","home","start over","restart","go back"]
+          },
+          "actions": [
+            {
+              "kind": "SendActivity",
+              "activity": {
+                "text": "=if(Conversation.Locale='sw','Nawezaje kukusaidia leo?\\n\\nChagua huduma ili kuendelea.','How can I assist you today?\\n\\nPlease choose a service to continue.')",
+                "quickReplies": [
+                  { "kind": "MessageBack", "text": "Accounts" },
+                  { "kind": "MessageBack", "text": "Mobile Banking" },
+                  { "kind": "MessageBack", "text": "Cards & ATM" },
+                  { "kind": "MessageBack", "text": "Transfers" },
+                  { "kind": "MessageBack", "text": "Help & Hours" },
+                  { "kind": "MessageBack", "text": "More" }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Accounts",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "accounts\\nopen account\\naccount help\\naccount number\\ndormant",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Accounts", "triggerQueries": ["accounts","open account","account help"] },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.AccountsStep",
+              "prompt": "=if(Conversation.Locale='sw','Unataka kufungua akaunti mpya au unahitaji msaada wa akaunti iliyopo?','Are you opening a new account or need help with an existing account?')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "New", "displayName": "=if(Conversation.Locale='sw','Akaunti Mpya','New Account')" },
+                    { "id": "Existing", "displayName": "=if(Conversation.Locale='sw','Akaunti Iliyopo','Existing Account')" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                {
+                  "condition": "=Topic.AccountsStep='New'",
+                  "actions": [
+                    {
+                      "kind": "Question",
+                      "variable": "init:Topic.NewAcctType",
+                      "prompt": "=if(Conversation.Locale='sw','Chagua aina ya akaunti ya kufungua:','Choose the type of account to open:')",
+                      "entity": {
+                        "kind": "EmbeddedEntity",
+                        "definition": {
+                          "kind": "ClosedListEntity",
+                          "items": [
+                            { "id": "Savings Account", "displayName": "=if(Conversation.Locale='sw','Akaunti ya Akiba','Savings Account')" },
+                            { "id": "SAYE Account", "displayName": "SAYE Account" },
+                            { "id": "Fixed Deposit Account", "displayName": "Fixed Deposit Account" },
+                            { "id": "HELB Account", "displayName": "HELB Account" },
+                            { "id": "Company Account", "displayName": "=if(Conversation.Locale='sw','Akaunti ya Kampuni','Company Account')" },
+                            { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "ConditionGroup",
+                      "conditions": [
+                        {
+                          "condition": "=Topic.NewAcctType='Savings Account'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Kufungua Akiba: Leta kitambulisho asili au pasipoti (na nakala), PIN ya KRA, na salio la chini la kufungua. Akaunti huwashwa siku hiyohiyo. Kadi ya ATM hutolewa mara moja isipokuwa ukielekezwa vinginevyo.','To open a Savings Account: Bring your original ID/Passport (plus a copy), KRA PIN, and the minimum opening balance. Account is usually activated the same day. ATM card is typically issued instantly unless advised otherwise.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.NewAcctType='SAYE Account'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Kufungua SAYE: Leta kitambulisho asili & nakala, PIN ya KRA, na salio la chini. Utoaji wa SAYE hufanyika tu tawini (akaunti ya akiba halisi).','To open a SAYE Account: Bring original & copy of ID/Passport, KRA PIN, and the minimum opening balance. Withdrawals are branch-only because SAYE is a pure savings account.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.NewAcctType='Fixed Deposit Account'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Fixed Deposit: Leta asili & nakala ya ID/Pasipoti, PIN ya KRA, na kiasi cha chini cha amana. Akaunti huwashwa baada ya uthibitisho wa amana; tawi litakuongoza kuhusu vipindi & viwango.','Fixed Deposit: Bring original & copy of ID/Passport, KRA PIN, and the minimum deposit. Activated upon deposit confirmation; branch will guide on terms and rates.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.NewAcctType='HELB Account'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Kwa akaunti ya HELB, tembelea tawi lililo karibu ukiwa na nakala ya cheti chako cha kuzaliwa na kitambulisho cha mzazi/mlezi.','For a HELB Account, visit the nearest branch with a copy of your birth certificate and your guardian’s/parent’s ID.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.NewAcctType='Company Account'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Akaunti ya Kampuni: \\n• Vitambulisho vya wasaini (Wakurugenzi)\\n• Picha 2 za pasipoti za kila msaini\\n• Nakala zilizoidhinishwa: MoU, Vyeti vya Usajili, Cheti cha Uanzishaji, PIN, Leseni ya Biashara ya sasa, Azimio la Wakurugenzi kufungua akaunti\\n• Nakala ya Annual Return (kwa kampuni zilizopo), imethibitishwa\\n• Azimio la Bodi lililosainiwa (Mwenyekiti & Katibu) na muhuri wa kampuni\\n• Salio la chini KSh 5,000 + Ada ya utafutaji KSh 1,800\\nTembelea tawi kwa mwongozo zaidi.','Company Account:\\n• IDs of signatory directors\\n• Two colored passport photos per signatory\\n• Certified copies: MoU, Registration Certificates, Certificate of Incorporation, PIN, current Business Permit, Directors’ Resolution to open account\\n• Annual Return (for existing companies) certified by company secretary\\n• Certified Board Resolution executed by Chair & Company Secretary with company seal\\n• KSh 5,000 minimum balance + KSh 1,800 search fee\\nVisit the branch for guidance.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.NewAcctType='Main Menu'",
+                          "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "condition": "=Topic.AccountsStep='Existing'",
+                  "actions": [
+                    {
+                      "kind": "Question",
+                      "variable": "init:Topic.ExistingAcctHelp",
+                      "prompt": "=if(Conversation.Locale='sw','Chagua huduma ya akaunti iliyopo:','Choose an existing account help topic:')",
+                      "entity": {
+                        "kind": "EmbeddedEntity",
+                        "definition": {
+                          "kind": "ClosedListEntity",
+                          "items": [
+                            { "id": "Dormant & Reactivation", "displayName": "=if(Conversation.Locale='sw','Akaunti Iliyolala & Uanzishaji','Dormant & Reactivation')" },
+                            { "id": "Account Number Help", "displayName": "=if(Conversation.Locale='sw','Namba ya Akaunti','Account Number Help')" },
+                            { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "ConditionGroup",
+                      "conditions": [
+                        {
+                          "condition": "=Topic.ExistingAcctHelp='Dormant & Reactivation'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Akaunti huwa “inactive” baada ya miezi 6 bila shughuli na “dormant” baada ya miezi 12. Ili kuifungua tena, tembelea tawi na ujaze fomu za uanzishaji. Unaweza pia kuweka kupitia Paybill 200999.','An account becomes inactive after 6 months of inactivity and dormant after 12 months. To reactivate, visit the nearest branch and complete activation forms. You may also deposit via Paybill 200999.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.ExistingAcctHelp='Account Number Help'",
+                          "actions": [
+                            {
+                              "kind": "SendActivity",
+                              "activity": {
+                                "text": "=if(Conversation.Locale='sw','Namba ya akaunti ni tarakimu 13 juu ya jina lako kwenye kadi ya debit. Ukiwa kwenye huduma ya simu, piga *498# uione. Pia unaweza kututumia jina na nambari ya kitambulisho kwa info@postbank.co.ke.','Your account number is the 13‑digit number above your name on your debit card. If registered for mobile banking, dial *498# to view it. You can also email your name and ID number to info@postbank.co.ke.')",
+                                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.ExistingAcctHelp='Main Menu'",
+                          "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "elseActions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.MobileBanking",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "mobile banking\\nussd *498#\\ninvalid device\\nblocked\\napp\\ncharges\\nbalance\\nuser id error",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Mobile Banking", "triggerQueries": ["mobile banking","mobile bank","*498#","ussd","invalid device","blocked","mobile app"] },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.MbStep",
+              "prompt": "=if(Conversation.Locale='sw','Ninawezaje kukusaidia kwenye Huduma ya Simu?','How can I help with Mobile Banking?')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "Register", "displayName": "=if(Conversation.Locale='sw','Jisajili','Register')" },
+                    { "id": "Fix an Error", "displayName": "=if(Conversation.Locale='sw','Tatua Hitilafu','Fix an Error')" },
+                    { "id": "App Download", "displayName": "=if(Conversation.Locale='sw','Pakua App','App Download')" },
+                    { "id": "Check Balance", "displayName": "=if(Conversation.Locale='sw','Angalia Salio','Check Balance')" },
+                    { "id": "Transfers to M-Pesa", "displayName": "Transfers to M-Pesa" },
+                    { "id": "More", "displayName": "=if(Conversation.Locale='sw','Zaidi','More')" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                {
+                  "condition": "=Topic.MbStep='Register'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kujisajili, piga *498# na ufuate maelekezo. Kumbuka: Safaricom hukata KSh 1 (airtime) unapoingia kwenye huduma.','To register, dial *498# and follow the prompts. Note: Safaricom deducts KSh 1 (airtime) when accessing the service.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MbStep='Fix an Error'",
+                  "actions": [
+                    {
+                      "kind": "Question",
+                      "variable": "init:Topic.MbError",
+                      "prompt": "=if(Conversation.Locale='sw','Ni aina gani ya hitilafu?','Which error are you seeing?')",
+                      "entity": {
+                        "kind": "EmbeddedEntity",
+                        "definition": {
+                          "kind": "ClosedListEntity",
+                          "items": [
+                            { "id": "Invalid Device", "displayName": "Invalid Device" },
+                            { "id": "Blocked", "displayName": "=if(Conversation.Locale='sw','Imeblokiwa','Blocked')" },
+                            { "id": "Exceeded Tries", "displayName": "=if(Conversation.Locale='sw','Imevuka majaribio','Exceeded Tries')" },
+                            { "id": "DOB Mismatch", "displayName": "=if(Conversation.Locale='sw','Tarehe ya Kuzaliwa haifanani','DOB Mismatch')" },
+                            { "id": "User ID Error", "displayName": "User ID Error" },
+                            { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "ConditionGroup",
+                      "conditions": [
+                        {
+                          "condition": "=Topic.MbError='Invalid Device'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','“Invalid Device” hutokea baada ya kubadili SIM/simu (IMSI hubadilika). Tafadhali tembelea tawi kwa kusaidiwa.','“Invalid Device” usually occurs after SIM/phone replacement due to IMSI mismatch. Please visit your branch to resolve.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbError='Blocked'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Makosa ya “Blocked” hutokea baada ya kujaribu PIN mara nyingi vibaya. Tembelea tawi kwa urejeshaji wa PIN.','A “Blocked” error can occur after too many incorrect PIN attempts. Visit the nearest branch for a PIN reset.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbError='Exceeded Tries'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Umevuka idadi ya majaribio. Subiri dakika chache kisha ujaribu tena.','You may have exceeded the maximum tries. Wait a few minutes, then try again.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbError='DOB Mismatch'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Hakikisha tarehe ya kuzaliwa inalingana na ile iliyo kwenye akaunti yako.','Ensure your date of birth matches the one on your account.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbError='User ID Error'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Error ya “User ID” humaanisha haujasajiliwa kwa huduma ya simu. Tembelea tawi ujisajili.','A “User ID” error usually means you’re not registered for mobile banking. Please visit the nearest branch to register.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbError='Main Menu'",
+                          "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MbStep='App Download'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "Postbank PataCASH app (Play Store): https://play.google.com/store/apps/details?id=io.eclectic.rnd.postbank" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MbStep='Check Balance'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Angalia salio kupitia: *498#, App ya Postbank (Play Store), au ATM yoyote.','Check your balance via: *498#, the Postbank App (Play Store), or any Postbank ATM.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MbStep='Transfers to M-Pesa'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kuhamisha hadi M-Pesa: 1) Jisajili kwa Huduma ya Simu 2) Piga *498# 3) Chagua uhamisho wa M-Pesa. (SAYE, SMATA, Premium Plus haziruhusiwi.)','To transfer to M-Pesa: 1) Register for Mobile Banking 2) Dial *498# 3) Choose the M-Pesa transfer option. (Excludes SAYE, SMATA, and Premium Plus.)')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MbStep='More'",
+                  "actions": [
+                    {
+                      "kind": "Question",
+                      "variable": "init:Topic.MbMore",
+                      "prompt": "=if(Conversation.Locale='sw','Chagua mada:','Pick a topic:')",
+                      "entity": {
+                        "kind": "EmbeddedEntity",
+                        "definition": {
+                          "kind": "ClosedListEntity",
+                          "items": [
+                            { "id": "Service Charges", "displayName": "=if(Conversation.Locale='sw','Ada ya Huduma','Service Charges')" },
+                            { "id": "ATM PIN for Login", "displayName": "ATM PIN for Login" },
+                            { "id": "Service Status", "displayName": "=if(Conversation.Locale='sw','Hali ya Huduma','Service Status')" },
+                            { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "kind": "ConditionGroup",
+                      "conditions": [
+                        {
+                          "condition": "=Topic.MbMore='Service Charges'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kuna ada kulingana na muamala. Pia Safaricom hukata KSh 1 (airtime) unapoingia huduma.','There are charges depending on the transaction. Also, Safaricom deducts KSh 1 (airtime) when accessing the service.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbMore='ATM PIN for Login'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Huwezi kutumia PIN ya ATM kuingia. Vitambulisho vya huduma ya simu ni vya kipekee.','You cannot use your ATM PIN to log in. Mobile/Internet Banking credentials are unique to this service.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbMore='Service Status'",
+                          "actions": [
+                            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Tunaweza kuwa na hitilafu ya mfumo au uboreshaji unaoendelea. Timu ya ICT inashughulikia kurejesha huduma.','We may be experiencing a system outage or an ongoing upgrade. Our ICT team is working to restore service.')" } }
+                          ]
+                        },
+                        {
+                          "condition": "=Topic.MbMore='Main Menu'",
+                          "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                { "condition": "=Topic.MbStep='Main Menu'", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.CardsATM",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "cards atm debit forgot pin limit processing withheld lost transaction declined blocked",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": {
+            "displayName": "Cards & ATM",
+            "triggerQueries": ["cards","atm","debit card","card issues","forgot pin","pin reset","limit","withheld","lost"]
+          },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.CardChoice",
+              "prompt": "=if(Conversation.Locale='sw','Ninawezaje kukusaidia na kadi/ATM?','How can I help with your card/ATM?')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "Forgot PIN", "displayName": "=if(Conversation.Locale='sw','Nimesahau PIN','Forgot PIN')" },
+                    { "id": "ATM Limit", "displayName": "ATM Limit" },
+                    { "id": "Processing & Fees", "displayName": "=if(Conversation.Locale='sw','Uchakatu & Ada','Processing & Fees')" },
+                    { "id": "Withheld/Lost", "displayName": "=if(Conversation.Locale='sw','Iliyokamatwa/Imepotea','Withheld/Lost')" },
+                    { "id": "Transaction Declined", "displayName": "=if(Conversation.Locale='sw','Muamala Umekataliwa','Transaction Declined')" },
+                    { "id": "Account Blocked", "displayName": "=if(Conversation.Locale='sw','Akaunti Imezuiliwa','Account Blocked')" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=Topic.CardChoice='Forgot PIN'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Tafadhali tembelea tawi lililo karibu kwa urejeshaji wa PIN ya ATM.','Please visit the nearest branch to request an ATM PIN reset.')" } } ] },
+                { "condition": "=Topic.CardChoice='ATM Limit'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kikomo cha kutoa ATM kwa siku ni KSh 40,000. Unaweza kuomba kuongeza kwenye tawi.','The daily ATM withdrawal limit is KSh 40,000. You can request a higher limit at your branch.')" } } ] },
+                { "condition": "=Topic.CardChoice='Processing & Fees'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kadi za ATM huchakatwa mara moja; ada KSh 600.','ATM cards are usually processed instantly; the processing fee is KSh 600.')" } } ] },
+                { "condition": "=Topic.CardChoice='Withheld/Lost'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Ikiwa kadi imekamatwa/imepotea, ripoti kwa tawi lililo karibu.','If your card is withheld or lost, report to the nearest branch for assistance.')" } } ] },
+                { "condition": "=Topic.CardChoice='Transaction Declined'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Ikiwa muamala umekataliwa/umezuiliwa, hakikisha kiasi cha kutoa hakizidi salio. Kwa msaada zaidi, tembelea tawi.','If a transaction is restricted/declined/not authorized, confirm the withdrawal amount does not exceed your available balance. For further assistance, visit your nearest branch.')" } } ] },
+                { "condition": "=Topic.CardChoice='Account Blocked'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Ikiwa akaunti imezuiliwa, tembelea tawi lililo karibu ili kusaidiwa kuifungua.','If your account is blocked, please visit the nearest branch for assistance with unblocking.')" } } ] },
+                { "condition": "=Topic.CardChoice='Main Menu'", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Transfers",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "transfers m-pesa mpesa paybill swift wrong number interbank time",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Transfers", "triggerQueries": ["transfer","transfers","send money","m-pesa","mpesa","paybill","swift","international"] },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.TransferChoice",
+              "prompt": "=if(Conversation.Locale='sw','Nini ungependa kufanya?','What would you like to do?')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "To M-Pesa", "displayName": "To M-Pesa" },
+                    { "id": "Paybill Deposit", "displayName": "=if(Conversation.Locale='sw','Amana kupitia Paybill','Paybill Deposit')" },
+                    { "id": "Interbank Time", "displayName": "=if(Conversation.Locale='sw','Muda wa Uhamisho wa Benki','Interbank Transfer Time')" },
+                    { "id": "Wrong Number (M-Pesa)", "displayName": "Wrong Number (M-Pesa)" },
+                    { "id": "Wrong Account Number", "displayName": "=if(Conversation.Locale='sw','Namba ya Akaunti Isiyo Sahihi','Wrong Account Number')" },
+                    { "id": "SWIFT Details", "displayName": "SWIFT Details" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=Topic.TransferChoice='To M-Pesa'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kuhamisha hadi M-Pesa: 1) Jisajili kwa Huduma ya Simu 2) Piga *498# 3) Chagua uhamisho wa M-Pesa. (SAYE, SMATA, Premium Plus haziruhusiwi.)','To transfer to M-Pesa: 1) Register for Mobile Banking 2) Dial *498# 3) Choose the M-Pesa transfer option. (Excludes SAYE, SMATA, and Premium Plus.)')" } } ] },
+                { "condition": "=Topic.TransferChoice='Paybill Deposit'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Paybill 200999: Akaunti: namba yako ya tarakimu 13 (kadi ya ATM) → Kiasi → PIN ya M-Pesa.','Deposit via Paybill 200999: Account: your 13‑digit account number (on your ATM card) → Amount → M‑Pesa PIN.')" } } ] },
+                { "condition": "=Topic.TransferChoice='Interbank Time'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Uhamisho kutoka benki nyingine huchukua takriban siku 1 ya kazi kuonekana.','Transfers from another bank typically reflect within one working day.')" } } ] },
+                { "condition": "=Topic.TransferChoice='Wrong Number (M-Pesa)'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Ukituma kwa namba isiyo sahihi, wasiliana na Huduma kwa Wateja: 0716 918 999 / 0734 856 353 au info@postbank.co.ke kwa usaidizi wa kurejesha.','If you sent money to the wrong mobile number, contact Customer Care: 0716 918 999 / 0734 856 353 or info@postbank.co.ke for reversal assistance.')" } } ] },
+                { "condition": "=Topic.TransferChoice='Wrong Account Number'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Tafadhali shiriki nambari yako ya kitambulisho, maelezo ya muamala, na namba sahihi ya akaunti ili tusaidie.','Please share your ID number, transaction details, and the correct account number so we can assist.')" } } ] },
+                { "condition": "=Topic.TransferChoice='SWIFT Details'", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','SWIFT kwa Postbank (incoming):\\nBenki: Citibank N.A., Nairobi\\nBank Code: 16000\\nAkaunti: 0300030106\\nMnufaika: Kenya Post Office Savings Bank\\nOngeza: Jina la mteja & namba ya akaunti','SWIFT details for incoming transfers:\\nBank: Citibank N.A., Nairobi\\nBank Code: 16000\\nAccount Number: 0300030106\\nBeneficiary: Kenya Post Office Savings Bank\\nInclude: Customer name & account number')" } } ] },
+                { "condition": "=Topic.TransferChoice='Main Menu'", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.HelpHours",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "help hours fees charges talk to agent support",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": {
+            "displayName": "Help & Hours",
+            "triggerQueries": ["help","help & hours","hours","fees","charges","talk to agent","support"]
+          },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.HelpChoice",
+              "prompt": "=if(Conversation.Locale='sw','Ninawezaje kukusaidia?','How can I help?')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "Branch Hours", "displayName": "=if(Conversation.Locale='sw','Saa za Matawi','Branch Hours')" },
+                    { "id": "Fees & Charges", "displayName": "=if(Conversation.Locale='sw','Ada & Malipo','Fees & Charges')" },
+                    { "id": "Talk to Agent", "displayName": "=if(Conversation.Locale='sw','Ongea na Wakala','Talk to Agent')" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                {
+                  "condition": "=Topic.HelpChoice='Branch Hours'",
+                  "actions": [
+                    {
+                      "kind": "SendActivity",
+                      "activity": {
+                        "text": "=if(Conversation.Locale='sw','Jumatatu–Ijumaa: 8:30am–4:00pm\\nJumamosi: 8:30am–12:30pm\\nImefungwa Jumapili & sikukuu. ATM zinapatikana 24/7.','Mon–Fri: 8:30am–4:00pm\\nSaturday: 8:30am–12:30pm\\nClosed on Sundays & public holidays. ATMs available 24/7.')",
+                        "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "condition": "=Topic.HelpChoice='Fees & Charges'",
+                  "actions": [
+                    {
+                      "kind": "SendActivity",
+                      "activity": {
+                        "text": "=if(Conversation.Locale='sw','Ada za kawaida:\\n• Uchakatu wa kadi ya ATM: KSh 600\\n• Kutoa ATM: KSh 40\\n• Kaunta: KSh 70\\n• Huduma ya simu: KSh 50–60\\n• PIN kutoa upya: KSh 168','Common fees:\\n• ATM card processing: KSh 600\\n• ATM withdrawal: KSh 40\\n• Over-the-counter withdrawal: KSh 70\\n• Mobile banking: KSh 50–60\\n• PIN re-issue: KSh 168')",
+                        "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "condition": "=Topic.HelpChoice='Talk to Agent'",
+                  "actions": [
+                    {
+                      "kind": "SendActivity",
+                      "activity": {
+                        "text": "=if(Conversation.Locale='sw','Ninaweza kukuunganisha na huduma kwa wateja:\\n• Piga: 0716 918 999 au 0734 856 353\\n• Barua pepe: info@postbank.co.ke\\n• Tembelea tawi lililo karibu','I can connect you to support:\\n• Call: 0716 918 999 or 0734 856 353\\n• Email: info@postbank.co.ke\\n• Visit your nearest branch')",
+                        "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+                      }
+                    }
+                  ]
+                },
+                { "condition": "=Topic.HelpChoice='Main Menu'", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.More",
+      "kind": "AdaptiveDialog",
+      "modelDescription": "more nys cheque maturity minimum balance privacy deceased agency loans careers complaints",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "More", "triggerQueries": ["more","zaidi","more options"] },
+          "actions": [
+            {
+              "kind": "Question",
+              "variable": "init:Topic.MoreChoice",
+              "prompt": "=if(Conversation.Locale='sw','Chagua mada:','Choose a topic:')",
+              "entity": {
+                "kind": "EmbeddedEntity",
+                "definition": {
+                  "kind": "ClosedListEntity",
+                  "items": [
+                    { "id": "NYS Payments", "displayName": "NYS Payments" },
+                    { "id": "Cheque Maturity", "displayName": "=if(Conversation.Locale='sw','Ukomavu wa Hundi','Cheque Maturity')" },
+                    { "id": "Minimum Balance", "displayName": "=if(Conversation.Locale='sw','Salio la Chini','Minimum Balance')" },
+                    { "id": "Deposit & Withdraw Channels", "displayName": "=if(Conversation.Locale='sw','Njia za Kuweka & Kutoa','Deposit & Withdraw Channels')" },
+                    { "id": "Privacy & Third-party", "displayName": "=if(Conversation.Locale='sw','Faragha & Watu wa Tatu','Privacy & Third-party')" },
+                    { "id": "Deceased Accounts", "displayName": "Deceased Accounts" },
+                    { "id": "Agency Banking", "displayName": "Agency Banking" },
+                    { "id": "Loans", "displayName": "=if(Conversation.Locale='sw','Mikopo','Loans')" },
+                    { "id": "Careers / Internship", "displayName": "Careers / Internship" },
+                    { "id": "Complaints / Feedback", "displayName": "=if(Conversation.Locale='sw','Malalamiko / Maoni','Complaints / Feedback')" },
+                    { "id": "Main Menu", "displayName": "=if(Conversation.Locale='sw','Menyu Kuu','Main Menu')" }
+                  ]
+                }
+              }
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                {
+                  "condition": "=Topic.MoreChoice='NYS Payments'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Malipo ya NYS huchakatwa kulingana na payroll na fedha kutoka NYS. Tafadhali wasiliana na wasimamizi/Kitengo cha Payroll cha NYS kwa usaidizi.','NYS allowances are processed based on payroll and funds submitted by NYS. Please liaise with your NYS supervisors/payroll section for assistance.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Cheque Maturity'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Hundi huchakatwa kwa siku 6 za kazi tangu kuwekewa.','Cheques take 6 working days to process from the date of deposit.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Minimum Balance'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','KSh 200 ni salio la chini la uendeshaji na hubaki hadi akaunti ifungwe.','KSh 200 is the minimum operating balance and remains until the account is closed.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Deposit & Withdraw Channels'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Unaweza kuweka/kutoa kupitia: • Wakala wa Postbank Mashinani • ATM kwa kadi yako • *498# • App ya Postbank (Play Store)','You can deposit/withdraw via: • Postbank Mashinani agent • ATM using your debit card • *498# • Postbank App (Play Store)')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Privacy & Third-party'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kwa usalama na faragha, tunawasaidia wamiliki halali wa akaunti pekee. Tafadhali mwombe mwenye akaunti atuwasiliane moja kwa moja.','For privacy and security, we can only discuss account details with the primary account holder. Please ask them to contact us directly.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Deceased Accounts'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Akaunti ya marehemu: Leta • Barua ya usimamizi wa mirathi kutoka mahakama/kaunti • Barua ya indemnity au uthibitisho wa grant kutoka Mahakama Kuu • Cheti cha kifo (asili & nakala) na bank plate/affidavit • Tembelea tawi.','Deceased account enquiries: Provide • Letter of administration/grant (court/county) • Indemnity letter or High Court confirmation • Death certificate (original & copy) and bank plate/affidavit • Visit your nearest branch.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Agency Banking'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kuwa wakala: • Biashara ≥ miezi 6 • Nafasi ≥ 150 sq ft • Mahali panapofikika (CBD/kituo) • Biashara imeandikishwa (toa MoA, Cheti cha Usajili/Uanzishaji, VAT & PIN, profaili fupi, taarifa za benki miezi 6, vitambulisho & picha za wakurugenzi) • Ushahidi wa kumiliki/kuendelea na mkataba.','Become a Postbank agent: • Operating business ≥ 6 months • Space ≥ 150 sq ft • Accessible location (CBD/center) • Registered business (MoA, Cert of Registration/Incorporation, VAT & PIN, brief profile, 6‑month bank statements, Directors’ IDs & photos) • Proof of premises (title deed/valid lease).')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Loans'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kwa sasa huduma za mkopo zinalengwa kwa wastaafu. Tutatoa taarifa tukipanua huduma.','Currently, credit services are limited to pensioners. We will share updates when offerings expand.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Careers / Internship'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Kwa sasa hakuna nafasi za ajira. Mafunzo hutolewa kwa robo mwaka kupitia HR (hr@postbank.co.ke) au wasilisha Postbank House, ghorofa ya 4.','Currently no job openings. Internships offered quarterly via HR (hr@postbank.co.ke) or submit at Postbank House, 4th floor.')" } }
+                  ]
+                },
+                {
+                  "condition": "=Topic.MoreChoice='Complaints / Feedback'",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Tunaomba radhi kwa usumbufu wowote. Tafadhali shiriki maelezo na namba yako ya simu ili tufuatilie na kuboresha huduma.','We’re sorry for any inconvenience. Please share details and your phone number so we can follow up and improve our services.')" } }
+                  ]
+                },
+                { "condition": "=Topic.MoreChoice='Main Menu'", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.MainMenu" } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Escalate",
+      "kind": "AdaptiveDialog",
+      "startBehavior": "CancelOtherTopics",
+      "triggers": [
+        {
+          "kind": "OnEscalate",
+          "intent": {
+            "displayName": "Escalate",
+            "triggerQueries": ["Talk to agent","Talk to a person","Call support","Chat with a human","Connect me to a live agent","Ongea na Wakala"]
+          },
+          "actions": [
+            {
+              "kind": "SendActivity",
+              "activity": {
+                "text": "=if(Conversation.Locale='sw','Ninaweza kukuunganisha na huduma kwa wateja:\\n• Piga: 0716 918 999 au 0734 856 353\\n• Barua pepe: info@postbank.co.ke\\n• Tembelea tawi lililo karibu','I can connect you to a Postbank representative:\\n• Call: 0716 918 999 or 0734 856 353\\n• Email: info@postbank.co.ke\\n• Visit your nearest branch')",
+                "quickReplies": [ { "kind": "MessageBack", "text": "Main Menu" } ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Fallback",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnUnknownIntent",
+          "priority": -1,
+          "actions": [
+            {
+              "kind": "SearchAndSummarizeContent",
+              "variable": "Topic.Answer",
+              "userInput": "=System.Activity.Text"
+            },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=!IsBlank(Topic.Answer)", "actions": [ { "kind": "EndDialog", "clearTopicQueue": true } ] }
+              ],
+              "elseActions": [
+                { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Samahani, sijashika. Tafadhali jaribu kuuliza kwa njia nyingine.','Sorry, I didn’t catch that. Please try asking another way.')" } }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.SignIn",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnSignIn",
+          "actions": [
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=System.SignInReason = SignInReason.SignInRequired", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Tafadhali ingia ili niweze kukusaidia.','Please sign in so I can help you.')" } } ] }
+              ]
+            },
+            { "kind": "OAuthInput", "title": "Login", "text": "To continue, please login" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.StartOver",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": {
+            "displayName": "Start Over",
+            "triggerQueries": ["let's begin again","start over","start again","restart","anzia tena"]
+          },
+          "actions": [
+            { "kind": "Question", "variable": "init:Topic.Confirm", "prompt": "=if(Conversation.Locale='sw','Una uhakika unataka kuanza upya?','Are you sure you want to restart the conversation?')", "entity": "BooleanPrebuiltEntity" },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=Topic.Confirm = true", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.ResetConversation" } ] }
+              ],
+              "elseActions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Sawa. Tuendelee.','Okay. Let’s continue.')" } } ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.ResetConversation",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Reset Conversation", "triggerQueries": ["reset"] },
+          "actions": [
+            { "kind": "ClearAllVariables", "variables": "ConversationScopedVariables" },
+            { "kind": "CancelAllDialogs" },
+            { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.LanguageSelect" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.ThankYou",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Thank you", "triggerQueries": ["thanks","thank you","asante","asante sana","ty"] },
+          "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Karibu.','You’re welcome.')" } } ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Greeting",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Greeting", "triggerQueries": ["Good afternoon","Good morning","Hello","Hey","Hi","Habari","Sasa"] },
+          "actions": [
+            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Habari, naweza kukusaidiaje leo?','Hello, how can I help you today?')" } },
+            { "kind": "CancelAllDialogs" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.Goodbye",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "Goodbye", "triggerQueries": ["Bye","Good bye","See you later","Kwaheri"] },
+          "actions": [
+            { "kind": "Question", "variable": "Topic.EndConversation", "prompt": "=if(Conversation.Locale='sw','Ungependa kumaliza mazungumzo yetu?','Would you like to end our conversation?')", "entity": "BooleanPrebuiltEntity" },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                { "condition": "=Topic.EndConversation = true", "actions": [ { "kind": "BeginDialog", "dialog": "copilots_header_3dd3e.topic.EndofConversation" } ] },
+                { "condition": "=Topic.EndConversation = false", "actions": [ { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Endelea tafadhali, naskiliza.','Go ahead, I’m listening.')" } } ] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.EndofConversation",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnRecognizedIntent",
+          "intent": { "displayName": "End Conversation", "triggerQueries": ["end","terminate","finish","maliza"] },
+          "actions": [
+            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Asante kwa kuzungumza nasi. Kuwa na siku njema! 👋','Thank you for chatting with Postbank. Have a great day! 👋')" } },
+            { "kind": "CancelAllDialogs" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.OnSystemRedirect",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnSystemRedirect",
+          "actions": [
+            { "kind": "SendActivity", "activity": { "text": "=if(Conversation.Locale='sw','Ninaweza kukusaidia vipi?','What can I help you with?')" } },
+            { "kind": "ClearAllVariables", "variables": "ConversationScopedVariables" },
+            { "kind": "CancelAllDialogs" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.OnError",
+      "kind": "AdaptiveDialog",
+      "startBehavior": "UseLatestPublishedContentAndCancelOtherTopics",
+      "triggers": [
+        {
+          "kind": "OnError",
+          "actions": [
+            { "kind": "SetVariable", "variable": "init:Topic.CurrentTime", "value": "=Text(Now(), DateTimeFormat.UTC)" },
+            {
+              "kind": "ConditionGroup",
+              "conditions": [
+                {
+                  "condition": "=System.Conversation.InTestMode = true",
+                  "actions": [
+                    { "kind": "SendActivity", "activity": { "text": "Error Message: {System.Error.Message}\\nError Code: {System.Error.Code}\\nConversation Id: {System.Conversation.Id}\\nTime (UTC): {Topic.CurrentTime}" } }
+                  ]
+                }
+              ],
+              "elseActions": [
+                { "kind": "SendActivity", "activity": { "text": "An error has occurred.\\nError code: {System.Error.Code}\\nConversation Id: {System.Conversation.Id}\\nTime (UTC): {Topic.CurrentTime}." } }
+              ]
+            },
+            { "kind": "LogCustomTelemetryEvent", "eventName": "OnErrorLog", "properties": "={ErrorMessage: System.Error.Message, ErrorCode: System.Error.Code, TimeUTC: Topic.CurrentTime, ConversationId: System.Conversation.Id}" },
+            { "kind": "CancelAllDialogs" }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "copilots_header_3dd3e.topic.OnSelectIntent",
+      "kind": "AdaptiveDialog",
+      "triggers": [
+        {
+          "kind": "OnSelectIntent",
+          "actions": [
+            { "kind": "SetVariable", "variable": "init:Topic.IntentOptions", "value": "=System.Recognizer.IntentOptions" },
+            { "kind": "SetTextVariable", "variable": "Topic.NoneOfTheseDisplayName", "value": "None of these" },
+            { "kind": "EditTable", "changeType": "Add", "itemsVariable": "Topic.IntentOptions", "value": "={ DisplayName: Topic.NoneOfTheseDisplayName, TopicId: \"NoTopic\", TriggerId: \"NoTrigger\", Score: 1.0 }" },
+            { "kind": "Question", "variable": "System.Recognizer.SelectedIntent", "prompt": "To clarify, did you mean:", "entity": { "kind": "DynamicClosedListEntity", "items": "=Topic.IntentOptions" } },
+            { "kind": "ConditionGroup", "conditions": [ { "condition": "=System.Recognizer.SelectedIntent.TopicId = 'NoTopic'", "actions": [ { "kind": "ReplaceDialog", "dialog": "copilots_header_3dd3e.topic.Fallback" } ] } ] }
+          ]
+        }
+      ]
+    }
+  ]
+}

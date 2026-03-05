@@ -11,18 +11,21 @@
     },
   
     "main_menu": {
+      "triggers": ["menu", "main menu", "home", "start over", "restart", "go back"],
       "message": {
-        "en": "Please choose a topic:",
-        "sw": "Chagua mada:"
+        "en": "How can I assist you today?\n\nPlease select a service below to continue.",
+        "sw": "Nawezaje kukusaidia vipi leo?\n\nChagua huduma hapa chini kuendelea."
       },
+
       "options": [
-        { "label": { "en": "Accounts", "sw": "Akaunti" }, "next": "accounts_menu" },
+        { "label": { "en": "Open Account", "sw": "Fungua Akaunti" }, "next": "accounts_menu" },
         { "label": { "en": "Mobile Banking", "sw": "Huduma ya Simu" }, "next": "mobile_menu" },
         { "label": { "en": "Cards & ATM", "sw": "Kadi & ATM" }, "next": "cards_menu" },
         { "label": { "en": "Transfers", "sw": "Uhamisho wa Fedha" }, "next": "transfers_menu" },
-        { "label": { "en": "Branches", "sw": "Matawi" }, "next": "branches_menu" },
-        { "label": { "en": "Loans", "sw": "Mikopo" }, "next": "loans_menu" },
-        { "label": { "en": "More", "sw": "Zaidi" }, "next": "more_menu" }
+        { "label": { "en": "Branch Hours", "sw": "Muda wa Matawi" }, "next": "branches_menu" },
+        { "label": { "en": "Fees & Charges", "sw": "Ada & Malipo" }, "next": "fees_menu" },
+        { "label": { "en": "Talk to Agent", "sw": "Ongea na Wakala" }, "next": "talk_to_agent" },
+        { "label": { "en": "Main Menu", "sw": "Menyu Kuu" }, "next": "main_menu" }
       ]
     },
   
